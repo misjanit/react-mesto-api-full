@@ -27,7 +27,7 @@ module.exports.login = (req, res, next) => {
         NODE_ENV === 'production' ? JWT_SECRET : 'secret',
         { expiresIn: '7d' },
       );
-      res.send({ token });
+      res.send({ token, email });
     })
     .catch(() => {
       throw new AuthError(appErrors.ERROR_LOGIN);
@@ -89,7 +89,7 @@ module.exports.getUserInfo = (req, res, next) => {
       if (!user) {
         throw new NotFoundError(appErrors.ERROR_USER_NOT_FOUND);
       }
-      return res.send({ user });
+      return res.send(user);
     })
     .catch(next);
 };
@@ -104,7 +104,7 @@ module.exports.updateUserInfo = (req, res, next) => {
       if (!user) {
         throw new NotFoundError(appErrors.ERROR_USER_NOT_FOUND);
       }
-      return res.send({ user });
+      return res.send(user);
     })
     .catch((err) => {
       if (err.name === 'ValidationError' || err.name === 'CastError') {

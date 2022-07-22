@@ -1,24 +1,32 @@
 const express = require('express');
 const cookieParser = require('cookie-parser');
+require('dotenv').config();
 const mongoose = require('mongoose');
 const { celebrate, Joi } = require('celebrate');
 const { errors } = require('celebrate');
 const bodyParser = require('body-parser');
+
 // routes
 const usersRoutes = require('./routes/users');
 const cardsRoutes = require('./routes/cards');
+
 // middlewares
+const { cors } = require('./middlewares/cors');
 const auth = require('./middlewares/auth');
 const { requestLogger, errorLogger } = require('./middlewares/logger');
+
 // controllers
 const { login, createUser } = require('./controllers/users');
+
 // errors handlers
 const appErrors = require('./errors/app-errors');
 const NotFoundError = require('./errors/not-found-error');
 const { regexpLink } = require('./utils/constants');
 
-const { PORT = 3000 } = process.env;
+const { PORT = 3001 } = process.env;
 const app = express();
+
+app.use(cors);
 
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
@@ -31,6 +39,12 @@ app.use(requestLogger); // подключаем логгер запросов
 app.use(cookieParser());
 
 // подключаем мидлвары, роуты и всё остальное
+// но сперва краш-тест (удалить после ревью)
+app.get('/crash-test', () => {
+  setTimeout(() => {
+    throw new Error('Сервер сейчас упадёт');
+  }, 0);
+});
 
 app.post('/signin', celebrate({
   body: Joi.object().keys({

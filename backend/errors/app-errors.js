@@ -10,6 +10,7 @@ module.exports = {
   ERROR_INCORRECT_NEW_CARD_PARAMS: 'Переданы некорректные данные при создании карточки',
   ERROR_INCORRECT_LIKE_PARAMS: 'Переданы некорректные данные для лайка',
   ERROR_DELETE_CARD: 'Ошибка при удалении карточки',
+  ERROR_DELETE_NOT_OWNER: 'Удалять карточки может только владелец',
   // AUTH
   ERROR_AUTH: 'Ошибка при авторизации',
   ERROR_AUTH_REQUIRED: 'Вам необходимо авторизоваться',

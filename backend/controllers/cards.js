@@ -8,7 +8,7 @@ const DeleteError = require('../errors/delete-error');
 // Получаем объект из всех карточек
 module.exports.getCards = (req, res, next) => {
   Card.find({})
-    .then((cards) => res.status(200).send({ cards }))
+    .then((cards) => res.status(200).send(cards))
     .catch(next);
 };
 
@@ -17,7 +17,7 @@ module.exports.createCard = (req, res, next) => {
   const { name, link } = req.body;
 
   Card.create({ name, link, owner: req.user._id })
-    .then((card) => res.send({ card }))
+    .then((card) => res.send(card))
     .catch((err) => {
       if (err.name === 'ValidationError') {
         throw new BadRequestError(appErrors.ERROR_INCORRECT_NEW_CARD_PARAMS);
@@ -36,10 +36,10 @@ module.exports.deleteCard = (req, res, next) => {
         throw new NotFoundError(appErrors.ERROR_CARD_NOT_FOUND);
       }
       if (userId !== card.owner.toString()) {
-        throw new DeleteError(appErrors.ERROR_DELETE_CARD);
+        throw new DeleteError(appErrors.ERROR_DELETE_NOT_OWNER);
       } else {
         Card.findByIdAndRemove(cardId)
-          .then((result) => res.send({ result }))
+          .then((result) => res.send(result))
           .catch(next);
       }
     })
@@ -57,7 +57,7 @@ module.exports.likeCard = (req, res, next) => {
       if (!card) {
         throw new NotFoundError(appErrors.ERROR_CARD_NOT_FOUND);
       }
-      return res.send({ card });
+      return res.send(card);
     })
     .catch((err) => {
       if (err.name === 'ValidationError' || err.name === 'CastError') {
@@ -74,7 +74,7 @@ module.exports.dislikeCard = (req, res, next) => {
       if (!card) {
         throw new NotFoundError(appErrors.ERROR_CARD_NOT_FOUND);
       }
-      return res.send({ card });
+      return res.send(card);
     })
     .catch((err) => {
       if (err.name === 'CastError') {
