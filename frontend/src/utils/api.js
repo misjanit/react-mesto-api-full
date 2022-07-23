@@ -119,7 +119,7 @@ class Api {
 }
 
 const api = new Api({
-    baseUrl: 'http://localhost:3001',
+    baseUrl: `${window.location.protocol}//imdone.nomoredomains.xyz`,
     headers: {
         'Accept': 'application/json',
         'Content-Type': 'application/json',

@@ -1,4 +1,4 @@
-export const baseUrl = 'http://localhost:3001';
+export const baseUrl = `${window.location.protocol}//imdone.nomoredomains.xyz`;
 
 const checkStatus = (res) => {
     if (res.ok) {
