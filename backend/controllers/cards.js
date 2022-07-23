@@ -20,9 +20,10 @@ module.exports.createCard = (req, res, next) => {
     .then((card) => res.send(card))
     .catch((err) => {
       if (err.name === 'ValidationError') {
-        throw new BadRequestError(appErrors.ERROR_INCORRECT_NEW_CARD_PARAMS);
+        next(new BadRequestError(appErrors.ERROR_INCORRECT_NEW_CARD_PARAMS));
+      } else {
+        next(err);
       }
-      return next(err);
     });
 };
 
@@ -61,9 +62,10 @@ module.exports.likeCard = (req, res, next) => {
     })
     .catch((err) => {
       if (err.name === 'ValidationError' || err.name === 'CastError') {
-        throw new BadRequestError(appErrors.ERROR_INCORRECT_NEW_CARD_PARAMS);
+        next(new BadRequestError(appErrors.ERROR_INCORRECT_NEW_CARD_PARAMS));
+      } else {
+        next(err);
       }
-      return next(err);
     });
 };
 
@@ -78,8 +80,9 @@ module.exports.dislikeCard = (req, res, next) => {
     })
     .catch((err) => {
       if (err.name === 'CastError') {
-        throw new BadRequestError(appErrors.ERROR_INCORRECT_LIKE_PARAMS);
+        next(new BadRequestError(appErrors.ERROR_INCORRECT_LIKE_PARAMS));
+      } else {
+        next(err);
       }
-      return next(err);
     });
 };

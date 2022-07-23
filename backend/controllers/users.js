@@ -76,9 +76,10 @@ module.exports.findUser = (req, res, next) => {
     })
     .catch((err) => {
       if (err.name === 'ValidationError' || err.name === 'CastError') {
-        throw new BadRequestError(appErrors.ERROR_USER_NOT_FOUND);
+        next(new BadRequestError(appErrors.ERROR_USER_NOT_FOUND));
+      } else {
+        next(err);
       }
-      return next(err);
     });
 };
 
@@ -108,9 +109,10 @@ module.exports.updateUserInfo = (req, res, next) => {
     })
     .catch((err) => {
       if (err.name === 'ValidationError' || err.name === 'CastError') {
-        throw new BadRequestError(appErrors.ERROR_INCORRECT_NEW_USER_PARAMS);
+        next(new BadRequestError(appErrors.ERROR_INCORRECT_NEW_USER_PARAMS));
+      } else {
+        next(err);
       }
-      return next(err);
     });
 };
 
@@ -128,8 +130,9 @@ module.exports.updateAvatar = (req, res, next) => {
     })
     .catch((err) => {
       if (err.name === 'ValidationError' || err.name === 'CastError') {
-        throw new BadRequestError(appErrors.ERROR_BAD_REQUEST);
+        next(new BadRequestError(appErrors.ERROR_BAD_REQUEST));
+      } else {
+        next(err);
       }
-      return next(err);
     });
 };
