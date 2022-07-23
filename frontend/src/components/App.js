@@ -71,11 +71,11 @@ function App() {
   }
 
   // запрос на обновление аватара
-  
+
   function handleUpdateAvatar(avatar) {
     api.editAvatar(avatar)
       .then(() => {
-        setCurrentUser({...currentUser, avatar});
+        setCurrentUser({ ...currentUser, avatar });
         closeAllPopups();
       })
       .catch((err) => console.log(err))
@@ -145,7 +145,6 @@ function App() {
   };
 
   // Проверить токен
-  useEffect(() => {
     const tokenCheck = () => {
       const jwt = localStorage.getItem('jwt');
       if (jwt) {
@@ -157,12 +156,14 @@ function App() {
               history.push('/');
             }
           })
-          .catch((err) => console.log(err))
+          .catch((err) => console.log(err)) 
+        }
       }
-    };
-    tokenCheck();
-  // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [])
+    
+    useEffect(() => {
+      tokenCheck();
+      // eslint-disable-next-line react-hooks/exhaustive-deps
+    }, [])
 
   const handleSignOut = () => {
     localStorage.removeItem('jwt');
