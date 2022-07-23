@@ -1,4 +1,4 @@
-export const baseUrl = `${window.location.protocol}//imdone.nomoredomains.xyz`;
+export const baseUrl = `${window.location.protocol}//imdone.back.nomoredomains.xyz`;
 
 const checkStatus = (res) => {
     if (res.ok) {
