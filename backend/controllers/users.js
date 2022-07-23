@@ -119,7 +119,7 @@ module.exports.updateAvatar = (req, res, next) => {
   const { avatar } = req.body;
   const id = req.user._id;
 
-  User.findOneAndUpdate(id, { avatar }, { new: true, runValidators: true })
+  User.findByIdAndUpdate(id, { avatar }, { new: true, runValidators: true })
     .then((user) => {
       if (!user) {
         throw new NotFoundError(appErrors.ERROR_USER_NOT_FOUND);

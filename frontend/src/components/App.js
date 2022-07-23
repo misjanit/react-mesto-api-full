@@ -71,32 +71,19 @@ function App() {
   }
 
   // запрос на обновление аватара
-  /*
+  
   function handleUpdateAvatar(avatar) {
-    console.log(avatar)
     api.editAvatar(avatar)
       .then(() => {
         setCurrentUser({...currentUser, avatar});
         closeAllPopups();
-        console.log(currentUser)
       })
       .catch((err) => console.log(err))
   }
-  */
- const handleUpdateAvatar = (avatar) => {
-  console.log(avatar)
-    api.editAvatar(avatar)
-      .then(() => {
-        setCurrentUser({...currentUser, avatar});
-        closeAllPopups();
-        console.log(currentUser)
-      })
-      .catch((err) => console.log(err))
- }
 
   // Поставить лайк
   function handleCardLike(card) {
-    const isLiked = card.likes.some(i => i._id === currentUser._id);
+    const isLiked = card.likes.some((i) => i === currentUser._id);
     // Отправляем запрос в API и получаем обновлённые данные карточки
     api.changeLikeCardStatus(card._id, !isLiked).then((newCard) => {
       setCards((state) => state.map((c) => c._id === card._id ? newCard : c));

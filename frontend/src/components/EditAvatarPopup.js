@@ -32,7 +32,7 @@ const EditAvatarPopup = (props) => {
         className="popup__input"
         type="url"
         placeholder="Ссылка на картинку"
-        name="avatarLink"
+        name="avatar"
         ref={refAvatar}
         required
         defaultValue=""
