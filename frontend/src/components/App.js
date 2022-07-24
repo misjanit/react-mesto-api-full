@@ -145,37 +145,43 @@ function App() {
   };
 
   // Проверить токен
-    const tokenCheck = () => {
-      const jwt = localStorage.getItem('jwt');
-      if (jwt) {
-        auth.checkTokenValidity(jwt)
-          .then((res) => {
-            if (res) {
-              setLoggedIn(true);
-              setEmail(res.email);
-              history.push('/');
-            }
-          })
-          .catch((err) => console.log(err)) 
-        }
-      }
-    
-    useEffect(() => {
-      tokenCheck();
-      // eslint-disable-next-line react-hooks/exhaustive-deps
-    }, []);
+  const tokenCheck = () => {
+    const token = localStorage.getItem('jwt');
+    if (token) {
+      auth.getContent(token)
+        .then((res) => {
+          if (res) {
+            setLoggedIn(true);
+            setEmail(res.email);
+            history.push('/');
+          }
+        })
+        .catch((err) => console.log(err))
+    }
+  }
+
+  const getContent = () => {
+    api.getAllData()
+      .then(([user, cards]) => {
+        setCards(cards);
+        setCurrentUser(user);
+      })
+      .catch(error => console.log(error))
+  }
+
+  useEffect(() => {
+    tokenCheck();
+    if (loggedIn) getContent();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [loggedIn]);
 
   const handleSignOut = () => {
-    api.logout()
-    .then((res) => {
-      localStorage.removeItem('jwt');
-      setLoggedIn(false);
-      setEmail('');
-      history.push('/sign-in');
-    })
-    .catch((err) => {
-      console.log(err)
-    })
+    localStorage.removeItem('jwt');
+    setEmail('');
+    setCurrentUser({});
+    setCards([]);
+    setLoggedIn(false);
+    history.push('/sign-in');
   };
 
   return (

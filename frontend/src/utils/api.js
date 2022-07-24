@@ -132,22 +132,15 @@ class Api {
         }
     }
 
-    logout() {
-        return fetch(`${this._baseUrl}/logout`, {
-            method: "POST",
-            credentials: "include",
-            headers: {
-                'Accept': 'application/json',
-                'Content-Type': 'application/json',
-                Authorization: `Bearer ${localStorage.getItem('jwt')}`,
-            },
-        }).then(this._handleResponse);
+    getAllData() {
+        return Promise.all([this.getProfile(), this.getInitialCards()]);
     }
 
 }
 
 const api = new Api({
     baseUrl: `${window.location.protocol}//imdone.back.nomoredomains.xyz`,
+    //baseUrl: `http://localhost:3001`,
     headers: {
         'Accept': 'application/json',
         'Content-Type': 'application/json',
