@@ -166,10 +166,17 @@ function App() {
     }, [])
 
   const handleSignOut = () => {
-    localStorage.removeItem('jwt');
-    setLoggedIn(false);
-    history.push('/sign-in');
-  }
+    api.logout()
+    .then((res) => {
+      localStorage.removeItem('jwt');
+      setLoggedIn(false);
+      setEmail('');
+      history.push('/sign-in');
+    })
+    .catch((err) => {
+      console.log(err)
+    })
+  };
 
   return (
     <CurrentUserContext.Provider value={currentUser} >

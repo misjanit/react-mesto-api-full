@@ -116,6 +116,16 @@ class Api {
         }
     }
 
+    logout() {
+        return fetch(`${this._baseUrl}/logout`, {
+          method: "POST",
+          credentials: "include",
+          headers: {
+            ...this._headers,
+          },
+        }).then(this._handleResponse);
+      }
+
 }
 
 const api = new Api({
