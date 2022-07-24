@@ -15,7 +15,9 @@ class Api {
         return fetch(`${this._baseUrl}/users/me`, {
             credentials: 'include',
             headers: {
-                ...this._headers,
+                'Accept': 'application/json',
+                'Content-Type': 'application/json',
+                Authorization: `Bearer ${localStorage.getItem('jwt')}`,
             },
         })
             .then(this._checkStatus);
@@ -25,7 +27,9 @@ class Api {
         return fetch(`${this._baseUrl}/cards`, {
             credentials: 'include',
             headers: {
-                ...this._headers,
+                'Accept': 'application/json',
+                'Content-Type': 'application/json',
+                Authorization: `Bearer ${localStorage.getItem('jwt')}`,
             },
         })
             .then(this._checkStatus);
@@ -36,7 +40,9 @@ class Api {
             method: 'PATCH',
             credentials: 'include',
             headers: {
-                ...this._headers,
+                'Accept': 'application/json',
+                'Content-Type': 'application/json',
+                Authorization: `Bearer ${localStorage.getItem('jwt')}`,
             },
             body: JSON.stringify({
                 name,
@@ -51,7 +57,9 @@ class Api {
             method: 'POST',
             credentials: 'include',
             headers: {
-                ...this._headers,
+                'Accept': 'application/json',
+                'Content-Type': 'application/json',
+                Authorization: `Bearer ${localStorage.getItem('jwt')}`,
             },
             body: JSON.stringify({
                 name,
@@ -66,7 +74,9 @@ class Api {
             method: 'DELETE',
             credentials: 'include',
             headers: {
-                ...this._headers,
+                'Accept': 'application/json',
+                'Content-Type': 'application/json',
+                Authorization: `Bearer ${localStorage.getItem('jwt')}`,
             },
         })
             .then(this._checkStatus);
@@ -77,7 +87,9 @@ class Api {
             method: 'DELETE',
             credentials: 'include',
             headers: {
-                ...this._headers,
+                'Accept': 'application/json',
+                'Content-Type': 'application/json',
+                Authorization: `Bearer ${localStorage.getItem('jwt')}`,
             },
         })
             .then(this._checkStatus);
@@ -88,7 +100,9 @@ class Api {
             method: 'PUT',
             credentials: 'include',
             headers: {
-                ...this._headers,
+                'Accept': 'application/json',
+                'Content-Type': 'application/json',
+                Authorization: `Bearer ${localStorage.getItem('jwt')}`,
             },
         })
             .then(this._checkStatus);
@@ -99,7 +113,9 @@ class Api {
             method: 'PATCH',
             credentials: 'include',
             headers: {
-                ...this._headers,
+                'Accept': 'application/json',
+                'Content-Type': 'application/json',
+                Authorization: `Bearer ${localStorage.getItem('jwt')}`,
             },
             body: JSON.stringify({
                 avatar: avatar,
@@ -118,13 +134,15 @@ class Api {
 
     logout() {
         return fetch(`${this._baseUrl}/logout`, {
-          method: "POST",
-          credentials: "include",
-          headers: {
-            ...this._headers,
-          },
+            method: "POST",
+            credentials: "include",
+            headers: {
+                'Accept': 'application/json',
+                'Content-Type': 'application/json',
+                Authorization: `Bearer ${localStorage.getItem('jwt')}`,
+            },
         }).then(this._handleResponse);
-      }
+    }
 
 }
 
