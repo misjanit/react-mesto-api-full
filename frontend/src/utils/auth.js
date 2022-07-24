@@ -42,7 +42,7 @@ export const checkTokenValidity = (jwt) => {
         headers: {
             "Accept": 'application/json',
             "Content-Type": "application/json",
-            Authorization: `Bearer ${jwt}`
+            Authorization: `Bearer ${localStorage.getItem('jwt')}`,
         },          
     })
         .then(checkStatus)
