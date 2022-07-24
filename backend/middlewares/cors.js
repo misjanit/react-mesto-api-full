@@ -3,6 +3,8 @@ const allowedUrls = [
   'https://praktikum.tk',
   'http://imdone.nomoredomains.xyz',
   'https://imdone.nomoredomains.xyz',
+  'http://imdone.back.nomoredomains.xyz',
+  'https://imdone.back.nomoredomains.xyz',
   'http://localhost:3000',
   'localhost:3000',
 ];
