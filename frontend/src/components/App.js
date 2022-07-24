@@ -143,7 +143,7 @@ function App() {
         console.log(err);
       })
   };
-/*
+
   // Проверить токен
     const tokenCheck = () => {
       const jwt = localStorage.getItem('jwt');
@@ -164,25 +164,6 @@ function App() {
       tokenCheck();
       // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [])
-  */
-
-// Проверить токен
-const tokenCheck = () => {
-    auth.checkTokenValidity()
-      .then((res) => {
-        if (res) {
-          setLoggedIn(true);
-          setEmail(res.email);
-          history.push('/');
-        }
-      })
-      .catch((err) => console.log(err)) 
-    }
-
-useEffect(() => {
-  tokenCheck();
-  // eslint-disable-next-line react-hooks/exhaustive-deps
-}, [])
 
   const handleSignOut = () => {
     localStorage.removeItem('jwt');

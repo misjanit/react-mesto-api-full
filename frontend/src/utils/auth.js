@@ -33,14 +33,14 @@ export const authorization = (email, password) => {
         .then(checkStatus)
 }
 
-export const checkTokenValidity = () => {
+export const checkTokenValidity = (jwt) => {
     return fetch(`${baseUrl}/users/me`, {
         method: 'GET',
         credentials: 'include',
         headers: {
             Accept: 'application/json',
             "Content-Type": "application/json",
-            // "Authorization": `Bearer ${jwt}`
+            "Authorization": `Bearer ${jwt}`
         },          
     })
         .then(checkStatus)
