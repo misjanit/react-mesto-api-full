@@ -4,19 +4,22 @@ const allowedUrls = [
   'http://imdone.nomoredomains.xyz',
   'https://imdone.nomoredomains.xyz',
   'http://localhost:3000',
+  'localhost:3000',
 ];
-
-const allowedMethods = 'GET, PUT, POST, PATCH, DELETE, HEAD';
 
 module.exports.cors = (req, res, next) => {
   const { origin } = req.headers;
-  const { method } = req;
-  const requestHeaders = req.headers['access-control-request-headers'];
+
+  res.header('Access-Control-Allow-Credentials', 'true');
 
   if (allowedUrls.includes(origin)) {
     res.header('Access-Control-Allow-Origin', origin);
-    res.header('Access-Control-Allow-Credentials', 'true');
   }
+
+  const { method } = req;
+
+  const allowedMethods = 'GET,HEAD,PUT,PATCH,POST,DELETE';
+  const requestHeaders = req.headers['access-control-request-headers'];
 
   if (method === 'OPTIONS') {
     res.header('Access-Control-Allow-Headers', requestHeaders);
